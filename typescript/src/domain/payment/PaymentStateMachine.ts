@@ -50,7 +50,7 @@ class PaymentStateMachine {
         return this.current;
     }
 
-    /** true si el pago no puede transicionar. */
+    /** @returns `true` si el pago no puede transicionar. */
     get isTerminal(): boolean {
         return this.allowedEvents().length === 0;
     }
