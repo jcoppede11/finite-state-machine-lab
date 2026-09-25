@@ -7,12 +7,13 @@ En la práctica, el dominio impone reglas simples: no puedes capturar un pago qu
 
 ## Dos implementaciones
 
-El mismo modelo está resuelto en dos lenguajes para poder comparar cómo se expresa la misma FSM en cada uno:
+El mismo modelo está resuelto en tres lenguajes para poder comparar cómo se expresa la misma FSM en cada uno:
 
 - **`typescript/`** — TypeScript, tests con Jest.
 - **`java/`** — Java, tests con JUnit 5 sobre Maven.
+- **`go/`** — Go (go1.26.1), tests con el paquete `testing` estándar.
 
-Ambas comparten los mismos estados, eventos y tabla de transiciones, así que el diagrama de abajo aplica a las dos.
+Las tres comparten los mismos estados, eventos y tabla de transiciones, así que el diagrama de abajo aplica a todas.
 
 ## El modelo
 
@@ -58,6 +59,16 @@ java/
   src/test/java/com/jcoppede/fsm/payment/
     PaymentStateMachineTest.java
     PaymentTest.java
+
+go/
+  go.mod
+  payment/
+    state.go                 # los estados
+    event.go                 # los eventos
+    statemachine.go          # tabla de transiciones + máquina + IllegalTransitionError
+    payment.go               # agregado
+    statemachine_test.go
+    payment_test.go
 ```
 
 ## Primeros pasos
@@ -75,4 +86,11 @@ pnpm test
 ```bash
 cd java
 mvn test
+```
+
+### Go
+
+```bash
+cd go/payment
+go test ./...
 ```
